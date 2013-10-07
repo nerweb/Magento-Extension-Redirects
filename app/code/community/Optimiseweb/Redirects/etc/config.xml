@@ -11,11 +11,12 @@
 
     <modules>
         <Optimiseweb_Redirects>
-            <version>0.1.5</version>
+            <version>0.1.6</version>
         </Optimiseweb_Redirects>
     </modules>
 
     <frontend>
+        
         <events>
             <controller_action_predispatch>
                 <observers>
@@ -27,6 +28,17 @@
                 </observers>
             </controller_action_predispatch>
         </events>
+        
+        <translate>
+            <modules>
+                <Optimiseweb_Redirects>
+                    <files>
+                        <default>Optimiseweb_Redirects.csv</default>
+                    </files>
+                </Optimiseweb_Redirects>
+            </modules>
+        </translate>
+        
     </frontend>
 
     <adminhtml>
