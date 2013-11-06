@@ -17,18 +17,6 @@
 
     <frontend>
         
-        <events>
-            <controller_action_predispatch>
-                <observers>
-                    <optimiseweb_redirects_model_redirector>
-                        <type>singleton</type>
-                        <class>ow_redirects/redirector</class>
-                        <method>doRedirects</method>
-                    </optimiseweb_redirects_model_redirector>
-                </observers>
-            </controller_action_predispatch>
-        </events>
-        
         <translate>
             <modules>
                 <Optimiseweb_Redirects>
@@ -76,7 +64,33 @@
                 <class>Optimiseweb_Redirects_Model</class>
             </ow_redirects>
         </models>
+        
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <optimiseweb_redirects_model_redirector>
+                        <type>singleton</type>
+                        <class>ow_redirects/redirector</class>
+                        <method>doRedirects</method>
+                    </optimiseweb_redirects_model_redirector>
+                </observers>
+            </controller_action_predispatch>
+        </events>
 
     </global>
 
+    <default>
+
+        <optimisewebredirects>
+            <version>
+                <version>legacy</version>
+            </version>
+            <redirects1>
+                <delimiter>,</delimiter>
+                <wildcardcharacter>*</wildcardcharacter>
+            </redirects1>
+        </optimisewebredirects>
+
+    </default>
+    
 </config>
