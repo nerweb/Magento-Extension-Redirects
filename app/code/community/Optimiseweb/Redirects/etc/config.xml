@@ -11,7 +11,7 @@
 
     <modules>
         <Optimiseweb_Redirects>
-            <version>0.1.6</version>
+            <version>0.1.8</version>
         </Optimiseweb_Redirects>
     </modules>
 
@@ -88,6 +88,7 @@
             </redirects1>
             <querystring>
                 <delimiter>,</delimiter>
+                <wildcardcharacter>*</wildcardcharacter>
             </querystring>
         </optimisewebredirects>
 

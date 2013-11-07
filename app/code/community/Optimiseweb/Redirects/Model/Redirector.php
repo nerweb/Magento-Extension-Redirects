@@ -110,16 +110,26 @@ class Optimiseweb_Redirects_Model_Redirector
 
                 foreach ($redirectLines AS $redirectLine) {
 
-                    $queryVarDestination = explode(Mage::getStoreConfig('optimisewebredirects/redirects1/delimiter'), $redirectLine);
+                    $queryVarDestination = explode(Mage::getStoreConfig('optimisewebredirects/querystring/delimiter'), $redirectLine);
 
                     if (count($queryVarDestination) == 5) {
-                        $sourceUrl = trim($queryVarDestination[0]);
+                        $sourceUrl = rtrim(trim($queryVarDestination[0]), '/');
                         $queryVar = trim($queryVarDestination[1]);
                         $queryValue = trim($queryVarDestination[2]);
                         $destinationUrl = trim($queryVarDestination[3]);
                         $redirectCode = (int) trim($queryVarDestination[4]);
 
+                        $doRedirect = FALSE;
+
                         if ($sourceUrl == $requestUrl) {
+                            $doRedirect = TRUE;
+                        } elseif (strpos($sourceUrl, Mage::getStoreConfig('optimisewebredirects/querystring/wildcardcharacter'))) {
+                            $sourceUrl = str_replace(Mage::getStoreConfig('optimisewebredirects/querystring/wildcardcharacter'), '', $sourceUrl);
+                            if (strpos($requestUrl, $sourceUrl) === 0) {
+                                $doRedirect = TRUE;
+                            }
+                        }
+                        if ($doRedirect) {
                             if (array_key_exists($queryVar, $queryParts) AND ($queryParts[$queryVar] == $queryValue)) {
                                 $response = Mage::app()->getResponse();
                                 $response->setRedirect($destinationUrl, $redirectCode);
