@@ -82,13 +82,13 @@
     <default>
 
         <optimisewebredirects>
-            <version>
-                <version>legacy</version>
-            </version>
             <redirects1>
                 <delimiter>,</delimiter>
                 <wildcardcharacter>*</wildcardcharacter>
             </redirects1>
+            <querystring>
+                <delimiter>,</delimiter>
+            </querystring>
         </optimisewebredirects>
 
     </default>

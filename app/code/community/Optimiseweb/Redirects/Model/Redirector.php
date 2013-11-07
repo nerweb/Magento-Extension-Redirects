@@ -27,20 +27,23 @@ class Optimiseweb_Redirects_Model_Redirector
         if ($actionName == 'noRoute') {
             $this->doRedirectsLegacy($requestUrl);
             $this->doRedirects1($requestUrl);
+            $this->doQueryStringRedirects($requestUrl);
         }
+        return;
     }
 
     protected function doRedirectsLegacy($requestUrl)
     {
         if (Mage::getStoreConfig('optimisewebredirects/general/upload') AND file_exists(Mage::getBaseDir('media') . '/optimiseweb/redirects/' . Mage::getStoreConfig('optimisewebredirects/general/upload'))) {
+
             $redirectLines = file(Mage::getBaseDir('media') . '/optimiseweb/redirects/' . Mage::getStoreConfig('optimisewebredirects/general/upload'));
 
             foreach ($redirectLines AS $redirectLine) {
+
                 $sourceDestination = explode(';', $redirectLine);
 
-                $sourceUrl = rtrim(trim($sourceDestination[0]), '/');
-
                 if (count($sourceDestination) == 2) {
+                    $sourceUrl = rtrim(trim($sourceDestination[0]), '/');
                     $destinationUrl = trim($sourceDestination[1]);
 
                     if ($sourceUrl == $requestUrl) {
@@ -58,9 +61,11 @@ class Optimiseweb_Redirects_Model_Redirector
     protected function doRedirects1($requestUrl)
     {
         if (Mage::getStoreConfig('optimisewebredirects/redirects1/upload') AND file_exists(Mage::getBaseDir('media') . '/optimiseweb/redirects/' . Mage::getStoreConfig('optimisewebredirects/redirects1/upload'))) {
+
             $redirectLines = file(Mage::getBaseDir('media') . '/optimiseweb/redirects/' . Mage::getStoreConfig('optimisewebredirects/redirects1/upload'));
 
             foreach ($redirectLines AS $redirectLine) {
+
                 $sourceDestination = explode(Mage::getStoreConfig('optimisewebredirects/redirects1/delimiter'), $redirectLine);
 
                 if (count($sourceDestination) == 3) {
@@ -69,6 +74,7 @@ class Optimiseweb_Redirects_Model_Redirector
                     $redirectCode = (int) trim($sourceDestination[2]);
 
                     $doRedirect = FALSE;
+
                     if ($sourceUrl == $requestUrl) {
                         $doRedirect = TRUE;
                     } elseif (strpos($sourceUrl, Mage::getStoreConfig('optimisewebredirects/redirects1/wildcardcharacter'))) {
@@ -84,6 +90,45 @@ class Optimiseweb_Redirects_Model_Redirector
                         exit;
                     }
                     continue;
+                }
+            }
+        }
+    }
+
+    protected function doQueryStringRedirects($requestUrl)
+    {
+        if (Mage::getStoreConfig('optimisewebredirects/querystring/upload') AND file_exists(Mage::getBaseDir('media') . '/optimiseweb/redirects/' . Mage::getStoreConfig('optimisewebredirects/querystring/upload'))) {
+
+            $query = parse_url($requestUrl);
+            $queryUrl = $query['scheme'] . '://' . $query['host'] . $query['path'];
+            $requestUrl = rtrim($queryUrl, '/');
+            parse_str($query['query'], $queryParts);
+
+            if (is_array($queryParts)) {
+
+                $redirectLines = file(Mage::getBaseDir('media') . '/optimiseweb/redirects/' . Mage::getStoreConfig('optimisewebredirects/querystring/upload'));
+
+                foreach ($redirectLines AS $redirectLine) {
+
+                    $queryVarDestination = explode(Mage::getStoreConfig('optimisewebredirects/redirects1/delimiter'), $redirectLine);
+
+                    if (count($queryVarDestination) == 5) {
+                        $sourceUrl = trim($queryVarDestination[0]);
+                        $queryVar = trim($queryVarDestination[1]);
+                        $queryValue = trim($queryVarDestination[2]);
+                        $destinationUrl = trim($queryVarDestination[3]);
+                        $redirectCode = (int) trim($queryVarDestination[4]);
+
+                        if ($sourceUrl == $requestUrl) {
+                            if (array_key_exists($queryVar, $queryParts) AND ($queryParts[$queryVar] == $queryValue)) {
+                                $response = Mage::app()->getResponse();
+                                $response->setRedirect($destinationUrl, $redirectCode);
+                                $response->sendResponse();
+                                exit;
+                            }
+                        }
+                        continue;
+                    }
                 }
             }
         }
