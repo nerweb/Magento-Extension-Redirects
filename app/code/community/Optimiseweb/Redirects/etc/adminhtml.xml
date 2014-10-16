@@ -8,6 +8,27 @@
 */
 -->
 <config>
+    
+    <menu>
+        <optimiseweball translate="title" module="ow_redirects">
+            <title>Optimise Web</title>
+            <sort_order>71</sort_order>
+            <children>
+                <ow_redirects translate="title" module="ow_redirects">
+                    <title>Mass 301 Redirects</title>
+                    <sort_order>5</sort_order>
+                    <action>adminhtml/system_config/edit/section/optimisewebredirects</action>
+                    <depends>
+                        <config>optimisewebredirects/menu/ow_redirects_enabled</config>
+                    </depends>
+                </ow_redirects>
+            </children>
+            <depends>
+                <config>optimisewebredirects/menu/optimiseweball_enabled</config>
+            </depends>
+        </optimiseweball>
+    </menu>
+
     <acl>
         <resources>
             <all>
@@ -43,4 +64,5 @@
             </admin>
         </resources>
     </acl>
+    
 </config>

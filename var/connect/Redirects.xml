@@ -1,5 +1,5 @@
 <_>
-   <form_key>Qbd6HnXHLx3ggdCt</form_key>
+   <form_key>pIawb6oqBXG0nMj3</form_key>
    <name>Optimiseweb_Redirects</name>
    <channel>community</channel>
    <version_ids>
@@ -11,9 +11,9 @@
 The Optimise Web Redirects extension allows you to upload all your redirect data as a CSV file.</description>
    <license>Open Software License (OSL)</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>0.1.9</version>
+   <version>0.2.1</version>
    <stability>stable</stability>
-   <notes>Bug Fix - Parse Query was not being checked and creating log errors. Fixed it.</notes>
+   <notes>* Fixing SSL urls</notes>
    <authors>
       <name>
          <name>Kathir Vel</name>
@@ -42,7 +42,7 @@ The Optimise Web Redirects extension allows you to upload all your redirect data
             <max/>
          </max>
          <files>
-            <files>          </files>
+            <files>            </files>
          </files>
       </package>
       <extension>
@@ -63,16 +63,19 @@ The Optimise Web Redirects extension allows you to upload all your redirect data
          <target>magecommunity</target>
          <target>mageetc</target>
          <target>magelocale</target>
+         <target>magedesign</target>
       </target>
       <path>
          <path/>
          <path>Optimiseweb/Redirects</path>
          <path>modules/Optimiseweb_Redirects.xml</path>
          <path>en_US/Optimiseweb_Redirects.csv</path>
+         <path>adminhtml/default/default/template/optimiseweb/redirects/system/config/fieldset/hint.phtml</path>
       </path>
       <type>
          <type>file</type>
          <type>dir</type>
+         <type>file</type>
          <type>file</type>
          <type>file</type>
       </type>
@@ -81,8 +84,10 @@ The Optimise Web Redirects extension allows you to upload all your redirect data
          <include/>
          <include/>
          <include/>
+         <include/>
       </include>
       <ignore>
+         <ignore/>
          <ignore/>
          <ignore/>
          <ignore/>

@@ -11,7 +11,7 @@
 
     <modules>
         <Optimiseweb_Redirects>
-            <version>0.1.9</version>
+            <version>0.2.1</version>
         </Optimiseweb_Redirects>
     </modules>
 
@@ -30,20 +30,6 @@
     </frontend>
 
     <adminhtml>
-
-        <menu>
-            <optimiseweball translate="title" module="ow_redirects">
-                <title>Optimise Web</title>
-                <sort_order>71</sort_order>
-                <children>
-                    <ow_redirects translate="title" module="ow_redirects">
-                        <title>Mass 301 Redirects</title>
-                        <sort_order>5</sort_order>
-                        <action>adminhtml/system_config/edit/section/optimisewebredirects</action>
-                    </ow_redirects>
-                </children>
-            </optimiseweball>
-        </menu>
 
         <translate>
             <modules>
@@ -94,6 +80,9 @@
     <default>
 
         <optimisewebredirects>
+            <disabled_products>
+                <enabled>0</enabled>
+            </disabled_products>
             <redirects1>
                 <delimiter>,</delimiter>
                 <wildcardcharacter>*</wildcardcharacter>
@@ -102,6 +91,13 @@
                 <delimiter>,</delimiter>
                 <wildcardcharacter>*</wildcardcharacter>
             </querystring>
+            <cataloguesearch>
+                <enabled>0</enabled>
+            </cataloguesearch>
+            <menu>
+                <optimiseweball_enabled>1</optimiseweball_enabled>
+                <ow_redirects_enabled>1</ow_redirects_enabled>
+            </menu>
         </optimisewebredirects>
 
     </default>

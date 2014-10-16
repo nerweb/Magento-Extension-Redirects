@@ -14,22 +14,50 @@ class Optimiseweb_Redirects_Model_Redirector
     /**
      * Redirect Function
      *
-     * Looks at 404 pages and then loads up the csv file to see if a match exists
+     * Looks at noRoute action and then loads up the csv files to see if a match exists
      *
      * @param Varien_Event_Observer $observer
      */
     public function doRedirects(Varien_Event_Observer $observer)
     {
         $request = $observer->getEvent()->getControllerAction()->getRequest();
-        $actionName = $request->getActionName();
-        $requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . $request->getRequestUri(), '/');
 
-        if ($actionName == 'noRoute') {
+        $actionName = $request->getActionName();
+
+        $disabledProductCheck = $this->disabledProductCheck($request);
+
+        $requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . $request->getRequestUri(), '/');
+        if ($disabledProductCheck) {
+            $requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . '/' . $disabledProductCheck, '/');
+        }
+
+        if (($actionName == 'noRoute') OR $disabledProductCheck) {
+            Mage::dispatchEvent('optimiseweb_redirects_before_legacy', array('request_url' => &$requestUrl));
             $this->doRedirectsLegacy($requestUrl);
+            Mage::dispatchEvent('optimiseweb_redirects_before_v1', array('request_url' => &$requestUrl));
             $this->doRedirects1($requestUrl);
+            Mage::dispatchEvent('optimiseweb_redirects_before_query_strings', array('request_url' => &$requestUrl));
             $this->doQueryStringRedirects($requestUrl);
+            Mage::dispatchEvent('optimiseweb_redirects_before_catalogue_search', array('request_url' => &$requestUrl));
+            $this->doRedirectsToCatalogueSearch($requestUrl);
         }
         return;
+    }
+
+    protected function disabledProductCheck($request)
+    {
+        if ($request->getActionName() !== 'noRoute') {
+            if (Mage::getStoreConfig('optimisewebredirects/disabled_products/enabled')) {
+                if (($request->getModuleName() == 'catalog') AND ( $request->getControllerName() == 'product') AND ( $request->getActionName() == 'view')) {
+                    if ($product = Mage::getModel('catalog/product')->load(Mage::app()->getRequest()->getParam('id'))) {
+                        if ($product->getStatus() == 2) {
+                            return $product->getUrlPath();
+                        }
+                    }
+                }
+            }
+        }
+        return FALSE;
     }
 
     protected function doRedirectsLegacy($requestUrl)
@@ -133,7 +161,7 @@ class Optimiseweb_Redirects_Model_Redirector
                             }
                         }
                         if ($doRedirect) {
-                            if (array_key_exists($queryVar, $queryParts) AND ($queryParts[$queryVar] == $queryValue)) {
+                            if (array_key_exists($queryVar, $queryParts) AND ( $queryParts[$queryVar] == $queryValue)) {
                                 $response = Mage::app()->getResponse();
                                 $response->setRedirect($destinationUrl, $redirectCode);
                                 $response->sendResponse();
@@ -144,6 +172,32 @@ class Optimiseweb_Redirects_Model_Redirector
                     }
                 }
             }
+        }
+    }
+
+    protected function doRedirectsToCatalogueSearch($requestUrl)
+    {
+        if ((bool) Mage::getStoreConfig('optimisewebredirects/cataloguesearch/enabled')) {
+
+            $query = parse_url($requestUrl);
+            $queryUrl = $query['scheme'] . '://' . $query['host'] . $query['path'];
+            $requestUrlSlashTrimmed = rtrim($queryUrl, '/');
+            $queryPath = $query['path'];
+            $queryPathSlashTrimmed = ltrim($queryPath, '/');
+            $queryPathExploded = explode('/', $queryPathSlashTrimmed);
+            $queryPathLast = end($queryPathExploded);
+
+            $searchQueryString = str_replace('.html', '', $queryPathSlashTrimmed);
+            $searchQueryString = str_replace('/', '+', $searchQueryString);
+
+            $catalogueSearchUrl = Mage::helper('catalogsearch')->getResultUrl();
+            $catalogueSearchQueryUrl = $catalogueSearchUrl . '?q=' . $searchQueryString;
+
+            $response = Mage::app()->getResponse();
+            $response->setRedirect($catalogueSearchQueryUrl, 301);
+            $response->sendResponse();
+
+            exit;
         }
     }
 
