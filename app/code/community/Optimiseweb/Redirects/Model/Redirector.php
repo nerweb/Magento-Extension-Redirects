@@ -40,6 +40,7 @@ class Optimiseweb_Redirects_Model_Redirector
             $this->doQueryStringRedirects($requestUrl);
             Mage::dispatchEvent('optimiseweb_redirects_before_catalogue_search', array('request_url' => &$requestUrl));
             $this->doRedirectsToCatalogueSearch($requestUrl);
+            Mage::dispatchEvent('optimiseweb_redirects_before_exiting', array('request_url' => &$requestUrl));
         }
         return;
     }

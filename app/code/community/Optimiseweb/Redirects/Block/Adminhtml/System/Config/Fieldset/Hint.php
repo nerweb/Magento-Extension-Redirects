@@ -24,6 +24,11 @@ class Optimiseweb_Redirects_Block_Adminhtml_System_Config_Fieldset_Hint extends 
         return $this->toHtml();
     }
 
+    public function getModuleName()
+    {
+        return 'Mass 301 Redirects';
+    }
+
     public function getModuleVersion()
     {
         return (string) Mage::getConfig()->getNode('modules/Optimiseweb_Redirects/version');
