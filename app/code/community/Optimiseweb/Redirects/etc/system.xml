@@ -26,7 +26,7 @@
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
             <groups>
-                
+
                 <hint>
                     <frontend_model>ow_redirects/adminhtml_system_config_fieldset_hint</frontend_model>
                     <sort_order>0</sort_order>
@@ -34,25 +34,24 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                 </hint>
-                
+
                 <disabled_products translate="label comment" module="ow_redirects">
                     <label>Disabled Products Check</label>
-                    <comment>
-                        <![CDATA[
-                        <div class="notice-msg" style="background-image: none!important; padding: 5px;">
-                        <p>With this option set to 'Yes', you can prevent visitors of disabled products from going to a 404 page. This feature has now been added due to popular demand.</p>
-                        <p style="margin-bottom: 0;">It is recommended to leave this option turned off unless you fully understand what the implications are. With this option set to 'Yes', this module will make a data call to check the product's status before every product page load. This could add a very tiny bit of additional processing before every product page load.</p>
-                        </div>
-                        ]]>
-                    </comment>
                     <frontend_type>text</frontend_type>
-                    <sort_order>1</sort_order>
+                    <sort_order>2</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
                         <enabled translate="label tooltip comment" module="ow_redirects">
                             <label>Redirect disabled products?</label>
+                            <tooltip>
+                                <![CDATA[
+                                <p>With this option set to 'Yes', you can prevent visitors of disabled products from going to a 404 page. This feature was added due to popular demand.</p>
+                                <p><strong><span style="color:#df280a;">If the above 'Redirect non-404 requests?' is set to 'Yes', it overrides this option.</span></strong></p>
+                                <p style="margin-bottom: 0;">It is recommended to leave this option turned off unless you fully understand what the implications are. With this option set to 'Yes', this module will make a data call to check the product's status before every product page load. This could add a very tiny bit of additional processing before every product page load.</p>
+                                ]]>
+                            </tooltip>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>1</sort_order>
@@ -64,7 +63,7 @@
                 </disabled_products>
 
                 <general translate="label comment" module="ow_redirects">
-                    <label>Legacy - Upload / Download CSV File</label>
+                    <label>Legacy - Upload / Download CSV File (DO NOT USE THIS - USE v1.0)</label>
                     <comment>
                         <![CDATA[
                         <div class="notice-msg" style="background-image: none!important; padding: 5px;">
@@ -76,12 +75,12 @@
                         ]]>
                     </comment>
                     <frontend_type>text</frontend_type>
-                    <sort_order>2</sort_order>
+                    <sort_order>3</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <upload translate="label comment" module="ow_redirects">
+                        <upload translate="label tooltip comment" module="ow_redirects">
                             <label>Upload Redirects File</label>
                             <comment>If you have already uploaded a CSV file and wish to add or edit the URLs, please download the current CSV file and reupload that file after making the changes.</comment>
                             <frontend_type>file</frontend_type>
@@ -93,7 +92,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </upload>
-                        <download translate="label comment" module="ow_redirects">
+                        <download translate="label tooltip comment" module="ow_redirects">
                             <label>Download Redirects File</label>
                             <comment>Right click on this link and click on 'Save Link As...'</comment>
                             <frontend_model>ow_redirects/system_config_backend_download</frontend_model>
@@ -120,12 +119,12 @@
                         ]]>
                     </comment>
                     <frontend_type>text</frontend_type>
-                    <sort_order>3</sort_order>
+                    <sort_order>4</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <upload translate="label comment" module="ow_redirects">
+                        <upload translate="label tooltip comment" module="ow_redirects">
                             <label>Upload Redirects File</label>
                             <comment>If you have already uploaded a CSV file and wish to add or edit the URLs, please download the current CSV file and reupload that file after making the changes.</comment>
                             <frontend_type>file</frontend_type>
@@ -137,7 +136,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </upload>
-                        <download translate="label comment" module="ow_redirects">
+                        <download translate="label tooltip comment" module="ow_redirects">
                             <label>Download Redirects File</label>
                             <comment>Right click on this link and click on 'Save Link As...'</comment>
                             <frontend_model>ow_redirects/system_config_backend_download1</frontend_model>
@@ -146,7 +145,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </download>
-                        <delimiter translate="label comment" module="ow_redirects">
+                        <delimiter translate="label tooltip comment" module="ow_redirects">
                             <label>Delimiter</label>
                             <comment>Defaults to comma (,). Depends on how you save your CSV file.</comment>
                             <frontend_type>text</frontend_type>
@@ -155,7 +154,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </delimiter>
-                        <wildcardcharacter translate="label comment" module="ow_redirects">
+                        <wildcardcharacter translate="label tooltip comment" module="ow_redirects">
                             <label>Wildcard Character</label>
                             <comment>Defaults to asterisk (*).</comment>
                             <frontend_type>text</frontend_type>
@@ -166,7 +165,7 @@
                         </wildcardcharacter>
                     </fields>
                 </redirects1>
-                
+
                 <querystring translate="label comment" module="ow_redirects">
                     <label>Query String Based Redirects</label>
                     <comment>
@@ -182,12 +181,12 @@
                         ]]>
                     </comment>
                     <frontend_type>text</frontend_type>
-                    <sort_order>4</sort_order>
+                    <sort_order>5</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <upload translate="label comment" module="ow_redirects">
+                        <upload translate="label tooltip comment" module="ow_redirects">
                             <label>Upload Redirects File</label>
                             <comment>If you have already uploaded a CSV file and wish to add or edit the URLs, please download the current CSV file and reupload that file after making the changes.</comment>
                             <frontend_type>file</frontend_type>
@@ -199,7 +198,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </upload>
-                        <download translate="label comment" module="ow_redirects">
+                        <download translate="label tooltip comment" module="ow_redirects">
                             <label>Download Redirects File</label>
                             <comment>Right click on this link and click on 'Save Link As...'</comment>
                             <frontend_model>ow_redirects/system_config_backend_downloadquerystringfile</frontend_model>
@@ -208,7 +207,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </download>
-                        <delimiter translate="label comment" module="ow_redirects">
+                        <delimiter translate="label tooltip comment" module="ow_redirects">
                             <label>Delimiter</label>
                             <comment>Defaults to comma (,). Depends on how you save your CSV file.</comment>
                             <frontend_type>text</frontend_type>
@@ -217,7 +216,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </delimiter>
-                        <wildcardcharacter translate="label comment" module="ow_redirects">
+                        <wildcardcharacter translate="label tooltip comment" module="ow_redirects">
                             <label>Wildcard Character</label>
                             <comment>Defaults to asterisk (*).</comment>
                             <frontend_type>text</frontend_type>
@@ -228,27 +227,26 @@
                         </wildcardcharacter>
                     </fields>
                 </querystring>
-                
+
                 <cataloguesearch translate="label comment" module="ow_redirects">
-                    <label>Redirect to Catalogue Search (Experimental Feature)</label>
-                    <comment>
-                        <![CDATA[
-                        <div class="notice-msg" style="background-image: none!important; padding: 5px;">
-                        <p>Use this as a last resort option. Instead of landing on a 404 page, you can get the module to redirect your visitor to a search page.</p>
-                        <p>Just a word of caution - enabling this option will make it so that there are no 404 errors on your website. This will even redirect missing images to a catalogue search.</p>
-                        <p>At the moment, the search keyword will be triggered by breaking up the last URL path. e.g. /electronics/iphone-5s.html will trigger a search for "iphone 5s"</p>
-                        <p style="margin-bottom: 0;">I hope to add more options and improve this feature in the future versions. Please send any suggestions that you might have.</p>
-                        </div>
-                        ]]>
-                    </comment>
+                    <label>Redirect to Catalogue Search (DEPRECATED - DO NOT USE THIS)</label>
                     <frontend_type>text</frontend_type>
-                    <sort_order>5</sort_order>
+                    <sort_order>6</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
                         <enabled translate="label tooltip comment" module="ow_redirects">
                             <label>Enable?</label>
+                            <tooltip>
+                                <![CDATA[
+                                <p>Use this as a last resort option. Instead of landing on a 404 page, you can get the module to redirect your visitor to a search page.</p>
+                                <p>Just a word of caution - enabling this option will make it so that there are no 404 errors on your website. This will even redirect missing images to a catalogue search.</p>
+                                <p>At the moment, the search keyword will be triggered by breaking up the last URL path. e.g. /electronics/iphone-5s.html will trigger a search for "iphone 5s"</p>
+                                <p><strong><span style="color:#df280a;">If the above 'Redirect non-404 requests?' is set to 'Yes', it overrides this option.</span></strong></p>
+                                <p style="margin-bottom: 0;"><strong><span style="color:#df280a;">This feature is not being developed anymore.</span></strong></p>
+                                ]]>
+                            </tooltip>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>1</sort_order>
@@ -261,13 +259,6 @@
 
                 <menu translate="label comment" module="ow_redirects">
                     <label>Admin Menu Control</label>
-                    <comment>
-                        <![CDATA[
-                        <div class="notice-msg" style="background-image: none!important; padding: 5px;">
-                        <p style="margin-bottom: 0;">The 'Optimise Web' menu group acts as a parent menu item for the various modules developed by Optimise Web. If you do not wish to see the link in the admin menu and would rather manually visit the System Config.</p>
-                        </div>
-                        ]]>
-                    </comment>
                     <frontend_type>text</frontend_type>
                     <sort_order>999</sort_order>
                     <show_in_default>1</show_in_default>
@@ -276,6 +267,12 @@
                     <fields>
                         <optimiseweball_enabled translate="label tooltip comment" module="ow_redirects">
                             <label>Enable the 'Optimise Web' Admin menu group?</label>
+                            <tooltip>
+                                <![CDATA[
+                                <p style="margin-bottom: 0;">The 'Optimise Web' menu group acts as a parent menu item for the various modules developed by Optimise Web. If you do not wish to see the link in the admin menu and would rather manually visit the System Config.</p>
+                                </div>
+                                ]]>
+                            </tooltip>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>1</sort_order>
@@ -285,6 +282,12 @@
                         </optimiseweball_enabled>
                         <ow_redirects_enabled translate="label tooltip comment" module="ow_redirects">
                             <label>Enable the 'Mass 301 Redirects' link from the Admin menu?</label>
+                            <tooltip>
+                                <![CDATA[
+                                <p style="margin-bottom: 0;">The 'Optimise Web' menu group acts as a parent menu item for the various modules developed by Optimise Web. If you do not wish to see the link in the admin menu and would rather manually visit the System Config.</p>
+                                </div>
+                                ]]>
+                            </tooltip>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>1</sort_order>

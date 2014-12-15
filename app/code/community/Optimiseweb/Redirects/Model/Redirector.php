@@ -48,7 +48,7 @@ class Optimiseweb_Redirects_Model_Redirector
     protected function disabledProductCheck($request)
     {
         if ($request->getActionName() !== 'noRoute') {
-            if (Mage::getStoreConfig('optimisewebredirects/disabled_products/enabled')) {
+            if ((bool) Mage::getStoreConfig('optimisewebredirects/disabled_products/enabled')) {
                 if (($request->getModuleName() == 'catalog') AND ( $request->getControllerName() == 'product') AND ( $request->getActionName() == 'view')) {
                     if ($product = Mage::getModel('catalog/product')->load(Mage::app()->getRequest()->getParam('id'))) {
                         if ($product->getStatus() == 2) {

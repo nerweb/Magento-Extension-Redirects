@@ -1,19 +1,17 @@
 <_>
-   <form_key>aifNBRtjOXQidgyB</form_key>
+   <form_key>JYtjTY5NCsJWgzbc</form_key>
    <name>Optimiseweb_Redirects</name>
    <channel>community</channel>
    <version_ids>
       <version_ids>2</version_ids>
    </version_ids>
-   <summary>Broken links can affect traffic and conversions. The Optimise Web Redirects extension helps setup bulk 301 redirects.</summary>
-   <description>Magento has an internal URL Rewrite Management system. It can be a laborious task to add all your redirects, one by one.
-
-The Optimise Web Redirects extension allows you to upload all your redirect data as a CSV file.</description>
+   <summary>Set up bulk 301 redirects for 404 pages by uploading the URL data in a CSV file. No HTACCESS or DB changes!</summary>
+   <description>Set up bulk 301 redirects for 404 pages by uploading the URL data in a CSV file. No HTACCESS or DB changes!</description>
    <license>Open Software License (OSL)</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>0.2.2</version>
+   <version>0.2.3</version>
    <stability>stable</stability>
-   <notes>* Added additional event - before exit</notes>
+   <notes>* Tidy up</notes>
    <authors>
       <name>
          <name>Kathir Vel</name>
@@ -42,7 +40,7 @@ The Optimise Web Redirects extension allows you to upload all your redirect data
             <max/>
          </max>
          <files>
-            <files>             </files>
+            <files>              </files>
          </files>
       </package>
       <extension>
