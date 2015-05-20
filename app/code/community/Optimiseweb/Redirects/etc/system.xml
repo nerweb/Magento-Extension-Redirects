@@ -3,7 +3,7 @@
 /**
 * @package    Optimiseweb_Redirects
 * @author     Kathir Vel (sid@optimiseweb.co.uk)
-* @copyright  Copyright (c) 2014 Optimise Web
+* @copyright  Copyright (c) 2015 Kathir Vel
 * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 */
 -->
@@ -12,7 +12,7 @@
     <tabs>
         <optimisewebconfig translate="label comment" module="ow_redirects">
             <label>Optimise Web</label>
-            <sort_order>0</sort_order>
+            <sort_order>400</sort_order>
         </optimisewebconfig>
     </tabs>
 
@@ -20,6 +20,8 @@
         <optimisewebredirects translate="label comment" module="ow_redirects">
             <label>Mass 301 Redirects</label>
             <tab>optimisewebconfig</tab>
+            <class>ow-system-section ow-mass-301-redirects-section</class>
+            <header_css>ow-system-header ow-mass-301-redirects-header</header_css>
             <frontend_type>text</frontend_type>
             <sort_order>99999</sort_order>
             <show_in_default>1</show_in_default>
@@ -38,7 +40,7 @@
                 <disabled_products translate="label comment" module="ow_redirects">
                     <label>Disabled Products Check</label>
                     <frontend_type>text</frontend_type>
-                    <sort_order>2</sort_order>
+                    <sort_order>1</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
@@ -47,8 +49,7 @@
                             <label>Redirect disabled products?</label>
                             <tooltip>
                                 <![CDATA[
-                                <p>With this option set to 'Yes', you can prevent visitors of disabled products from going to a 404 page. This feature was added due to popular demand.</p>
-                                <p><strong><span style="color:#df280a;">If the above 'Redirect non-404 requests?' is set to 'Yes', it overrides this option.</span></strong></p>
+                                <p>With this option set to 'Yes', you can prevent visitors of disabled products from going to a 404 page.</p>
                                 <p style="margin-bottom: 0;">It is recommended to leave this option turned off unless you fully understand what the implications are. With this option set to 'Yes', this module will make a data call to check the product's status before every product page load. This could add a very tiny bit of additional processing before every product page load.</p>
                                 ]]>
                             </tooltip>
@@ -62,8 +63,34 @@
                     </fields>
                 </disabled_products>
 
+                <disabled_categories translate="label comment" module="ow_redirects">
+                    <label>Disabled Categories Check</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label tooltip comment" module="ow_redirects">
+                            <label>Redirect disabled categories?</label>
+                            <tooltip>
+                                <![CDATA[
+                                <p>With this option set to 'Yes', you can prevent visitors of disabled categories from going to a 404 page.</p>
+                                <p style="margin-bottom: 0;">It is recommended to leave this option turned off unless you fully understand what the implications are. With this option set to 'Yes', this module will make a data call to check the category's status before every category page load. This could add a very tiny bit of additional processing before every category page load.</p>
+                                ]]>
+                            </tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                    </fields>
+                </disabled_categories>
+
                 <general translate="label comment" module="ow_redirects">
-                    <label>Legacy - Upload / Download CSV File (DO NOT USE THIS - USE v1.0)</label>
+                    <label>Legacy - Deprecated - DO NOT USE THIS - Use Redirects System v1.0</label>
                     <comment>
                         <![CDATA[
                         <div class="notice-msg" style="background-image: none!important; padding: 5px;">
@@ -229,7 +256,7 @@
                 </querystring>
 
                 <cataloguesearch translate="label comment" module="ow_redirects">
-                    <label>Redirect to Catalogue Search (DEPRECATED - DO NOT USE THIS)</label>
+                    <label>Redirect to Catalogue Search - DEPRECATED - DO NOT USE THIS OPTION</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>6</sort_order>
                     <show_in_default>1</show_in_default>

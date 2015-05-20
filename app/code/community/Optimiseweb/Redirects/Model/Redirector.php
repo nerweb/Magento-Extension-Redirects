@@ -5,7 +5,7 @@
  *
  * @package     Optimiseweb_Redirects
  * @author      Kathir Vel (sid@optimiseweb.co.uk)
- * @copyright   Copyright (c) 2014 Optimise Web
+ * @copyright   Copyright (c) 2015 Kathir Vel
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class Optimiseweb_Redirects_Model_Redirector
@@ -25,13 +25,17 @@ class Optimiseweb_Redirects_Model_Redirector
         $actionName = $request->getActionName();
 
         $disabledProductCheck = $this->disabledProductCheck($request);
+        $disabledCategoryCheck = $this->disabledCategoryCheck($request);
 
         $requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . $request->getRequestUri(), '/');
         if ($disabledProductCheck) {
             $requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . '/' . $disabledProductCheck, '/');
         }
+        if ($disabledCategoryCheck) {
+            $requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . '/' . $disabledCategoryCheck, '/');
+        }
 
-        if (($actionName == 'noRoute') OR $disabledProductCheck) {
+        if (($actionName == 'noRoute') OR $disabledProductCheck OR $disabledCategoryCheck) {
             Mage::dispatchEvent('optimiseweb_redirects_before_legacy', array('request_url' => &$requestUrl));
             $this->doRedirectsLegacy($requestUrl);
             Mage::dispatchEvent('optimiseweb_redirects_before_v1', array('request_url' => &$requestUrl));
@@ -53,6 +57,22 @@ class Optimiseweb_Redirects_Model_Redirector
                     if ($product = Mage::getModel('catalog/product')->load(Mage::app()->getRequest()->getParam('id'))) {
                         if ($product->getStatus() == 2) {
                             return $product->getUrlPath();
+                        }
+                    }
+                }
+            }
+        }
+        return FALSE;
+    }
+
+    protected function disabledCategoryCheck($request)
+    {
+        if ($request->getActionName() !== 'noRoute') {
+            if ((bool) Mage::getStoreConfig('optimisewebredirects/disabled_products/enabled')) {
+                if (($request->getModuleName() == 'catalog') AND ( $request->getControllerName() == 'category') AND ( $request->getActionName() == 'view')) {
+                    if ($category = Mage::getModel('catalog/category')->load(Mage::app()->getRequest()->getParam('id'))) {
+                        if ($category->getIsActive() == 0) {
+                            return $category->getUrlPath();
                         }
                     }
                 }
