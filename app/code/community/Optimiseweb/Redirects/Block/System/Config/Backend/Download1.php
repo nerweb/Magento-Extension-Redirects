@@ -4,7 +4,7 @@
  * Optimiseweb Redirects Block System Config Backend Download1
  *
  * @package     Optimiseweb_Redirects
- * @author      Kathir Vel (sid@optimiseweb.co.uk)
+ * @author      Kathir Vel (vkathirvel@gmail.com)
  * @copyright   Copyright (c) 2015 Kathir Vel
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
