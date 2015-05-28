@@ -29,7 +29,7 @@
             <show_in_store>1</show_in_store>
             <groups>
 
-                <hint>
+                <hint translate="label comment" module="ow_redirects">
                     <frontend_model>ow_redirects/adminhtml_system_config_fieldset_hint</frontend_model>
                     <sort_order>0</sort_order>
                     <show_in_default>1</show_in_default>
