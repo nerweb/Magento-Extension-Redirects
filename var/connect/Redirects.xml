@@ -9,9 +9,9 @@
    <description>Set up bulk 301 redirects for 404 pages by uploading the URL data in a CSV file. No HTACCESS or DB changes!</description>
    <license>Open Software License (OSL)</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>0.3.1</version>
+   <version>0.3.2</version>
    <stability>stable</stability>
-   <notes>* Minor update</notes>
+   <notes>* Minor update to disabled products and categories URLs * Removed reporting of admin url and email * The module reports the module and Magento version for me to know about compatibility</notes>
    <authors>
       <name>
          <name>Kathir Vel</name>

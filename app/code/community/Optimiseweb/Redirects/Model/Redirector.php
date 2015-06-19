@@ -29,10 +29,12 @@ class Optimiseweb_Redirects_Model_Redirector
 
         $requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . $request->getRequestUri(), '/');
         if ($disabledProductCheck) {
-            $requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . '/' . $disabledProductCheck, '/');
+            //$requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . '/' . $disabledProductCheck, '/');
+            $requestUrl = rtrim(Mage::getUrl() . $disabledProductCheck, '/');
         }
         if ($disabledCategoryCheck) {
-            $requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . '/' . $disabledCategoryCheck, '/');
+            //$requestUrl = rtrim($request->getScheme() . '://' . $request->getHttpHost() . '/' . $disabledCategoryCheck, '/');
+            $requestUrl = rtrim(Mage::getUrl() . $disabledCategoryCheck, '/');
         }
 
         if (($actionName == 'noRoute') OR $disabledProductCheck OR $disabledCategoryCheck) {

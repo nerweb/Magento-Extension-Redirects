@@ -87,9 +87,7 @@ class Optimiseweb_Redirects_Block_Adminhtml_System_Config_Fieldset_Hint extends 
         $aux = (array_key_exists('Enterprise_Enterprise', $modulesArray)) ? 'EE' : 'CE';
         $mageVersion = Mage::getVersion();
         $mage = 'Magento_' . $aux . '_' . $mageVersion;
-        $hash = md5($ext . '_' . $mage . '_' . $ext);
-        $url = Mage::getBaseUrl();
-        return 'extension=' . $ext . '&magento=' . $mage . '&url=' . $url . '&ctrl=' . $hash;
+        return 'extension=' . $ext . '&magento=' . $mage;
     }
 
 }
