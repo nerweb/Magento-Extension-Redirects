@@ -22,6 +22,14 @@ class Optimiseweb_Redirects_Model_Redirector
     {
         $request = $observer->getEvent()->getControllerAction()->getRequest();
 
+        // get path info
+        // remove the query string from REQUEST_URI
+        $requestUri = $request->getRequestUri();
+        if ($pos = strpos($requestUri, '?')) {
+            $requestUri = substr($requestUri, 0, $pos);
+        }
+        $requestPathInfo = substr($requestUri, strlen($request->getBaseUrl()));
+
         $actionName = $request->getActionName();
 
         $disabledProductCheck = $this->disabledProductCheck($request);
@@ -41,7 +49,7 @@ class Optimiseweb_Redirects_Model_Redirector
             Mage::dispatchEvent('optimiseweb_redirects_before_legacy', array('request_url' => &$requestUrl));
             $this->doRedirectsLegacy($requestUrl);
             Mage::dispatchEvent('optimiseweb_redirects_before_v1', array('request_url' => &$requestUrl));
-            $this->doRedirects1($requestUrl);
+            $this->doRedirects1($requestUrl, $requestPathInfo);
             Mage::dispatchEvent('optimiseweb_redirects_before_query_strings', array('request_url' => &$requestUrl));
             $this->doQueryStringRedirects($requestUrl);
             Mage::dispatchEvent('optimiseweb_redirects_before_catalogue_search', array('request_url' => &$requestUrl));
@@ -109,7 +117,7 @@ class Optimiseweb_Redirects_Model_Redirector
         }
     }
 
-    protected function doRedirects1($requestUrl)
+    protected function doRedirects1($requestUrl, $requestPathInfo)
     {
         if (Mage::getStoreConfig('optimisewebredirects/redirects1/upload') AND file_exists(Mage::getBaseDir('media') . '/optimiseweb/redirects/' . Mage::getStoreConfig('optimisewebredirects/redirects1/upload'))) {
 
@@ -133,6 +141,8 @@ class Optimiseweb_Redirects_Model_Redirector
                         if (strpos($requestUrl, $sourceUrl) === 0) {
                             $doRedirect = TRUE;
                         }
+                    } else if (trim($requestPathInfo, '/') == trim($sourceUrl, '/')) {
+                        $doRedirect = TRUE;
                     }
                     if ($doRedirect) {
                         $response = Mage::app()->getResponse();
@@ -223,5 +233,4 @@ class Optimiseweb_Redirects_Model_Redirector
             exit;
         }
     }
-
 }
